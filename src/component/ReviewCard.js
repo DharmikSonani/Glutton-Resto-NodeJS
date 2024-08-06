@@ -10,7 +10,7 @@ import moment from 'moment';
 const ReviewCard = ({ data }) => {
     const userName = data?.userId?.userName;
     const userImg = data?.userId?.userImg;
-    const time = moment(new Date(data?.createdAt)).fromNow().toString();
+    const time = data?.createdAt && moment(new Date(data?.createdAt)).fromNow().toString();
 
     return (
         <View style={[styles.Container]}>

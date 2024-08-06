@@ -74,7 +74,7 @@ const HomeScreen = (props) => {
                 toolbarEnabled={false}
             >
                 {
-                    data.length > 0 && data.map((marker, index) => {
+                    data?.length > 0 && data?.map((marker, index) => {
                         const scaleStyle = {
                             transform: [
                                 {
@@ -139,7 +139,7 @@ const HomeScreen = (props) => {
                 }}
             >
                 {
-                    data.map((marker, index) => {
+                    data?.map((marker, index) => {
                         const inputRange = [
                             (index - 2) * width,
                             (index - 1) * width,

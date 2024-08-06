@@ -94,7 +94,7 @@ const useScreenHooks = (props) => {
         _scrollView?.current?.scrollTo({ x: x, animated: true });
     }
 
-    const interpolations = data.map((marker, index) => {
+    const interpolations = data?.map((marker, index) => {
         const inputRange = [
             (index - 2) * width - 25,
             (index - 1) * width - 25,

@@ -13,6 +13,9 @@ const RESTAURANT_BASE_URL = `${BASE_URL}/restaurant`;
 const ACTIVE_RESTAURANT_URL = `${RESTAURANT_BASE_URL}/active`;
 const FAVOURITE_RESTAURANT_URL = `${RESTAURANT_BASE_URL}/favourite`;
 
+const RATING_BASE_URL = `${BASE_URL}/rating`;
+const ADD_RATING_URL = `${RATING_BASE_URL}/add`;
+
 // POST
 
 
@@ -46,6 +49,16 @@ export const getFavouriteRestaurantsAPI = async (params) => {
     //     }
     // }
     const res = await axios.post(`${FAVOURITE_RESTAURANT_URL}`, params);
+    return res;
+}
+
+export const addRatingAPI = async (params) => {
+    // const headers = {
+    //     headers: {
+    //         'Authorization': 'Bearer ' + authToken,
+    //     }
+    // }
+    const res = await axios.post(`${ADD_RATING_URL}`, params);
     return res;
 }
 

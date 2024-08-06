@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 import { Reducers } from '../../constants/Strings';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NormalSnackBar } from '../../constants/SnackBars';
-import { RatingDBFields, RatingDBPath, RestaurantDBPath } from '../../constants/Database';
-import firestore from '@react-native-firebase/firestore';
+import { addRatingAPI } from '../../api/utils';
 
 const AddReviewModal = ({
     restId,
@@ -39,75 +38,48 @@ const AddReviewModal = ({
         };
     }, []);
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
+        try {
+            if (rating == 0) {
+                NormalSnackBar('Give Ratings.')
+                return;
+            }
 
-        if (rating == 0) {
-            NormalSnackBar('Give Ratings.')
-            return;
-        }
+            if (!desc) {
+                NormalSnackBar('Give Review about your experience.')
+                return;
+            }
 
-        if (!desc) {
-            NormalSnackBar('Give Review about your experience.')
-            return;
-        }
+            setLoading(true);
 
-        setLoading(true);
+            let data = {};
 
-        let data = {};
+            data['restId'] = restId;
+            data['review'] = desc;
+            data['rating'] = rating;
+            data['userId'] = uid;
 
-        data[RatingDBFields.userId] = uid;
-        data[RatingDBFields.restId] = restId;
-        data[RatingDBFields.review] = desc;
-        data[RatingDBFields.rating] = rating;
-        data[RatingDBFields.time] = firestore.Timestamp.fromDate(new Date());
+            const res = await addRatingAPI(data);
 
-        RatingDBPath
-            .add(data)
-            .then(() => {
-                updateData();
+            if (res?.data && res.data?.status == true) {
                 NormalSnackBar('Review Submit.')
                 setLoading(false);
                 setRating(0);
                 setDesc('');
                 setModalVisible(false);
-            }).catch(() => {
+            } else {
                 NormalSnackBar('Something wents wrong.')
                 setLoading(false);
                 setRating(0);
                 setDesc('');
-            })
-    }
-
-    const updateData = () => {
-        let totalRatings = 0;
-        let totalReviews = 0;
-        try {
-            RatingDBPath
-                .orderBy(RatingDBFields.time, 'desc')
-                .where(RatingDBFields.restId, '==', restId)
-                .onSnapshot((querySnap) => {
-                    const list = querySnap.docs.map((doc, i) => {
-                        const { rating, } = doc.data();
-                        totalRatings = totalRatings + rating;
-                        return { rating }
-                    })
-                    totalReviews = list.length;
-                    let rating = 0;
-                    if (Math.round(totalRatings / totalReviews) > 0) {
-                        rating = Math.round(totalRatings / totalReviews);
-                    }
-                    RestaurantDBPath
-                        .doc(restId)
-                        .update({
-                            rate: rating,
-                            reviews: totalReviews,
-                        })
-                })
+            }
         } catch (e) {
-            console.log(e);
+            NormalSnackBar('Something wents wrong.')
+            setLoading(false);
+            setRating(0);
+            setDesc('');
         }
     }
-
 
     return (
         <Modal

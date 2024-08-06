@@ -8,7 +8,6 @@ export const InvoiceDBPath = firestore().collection("Invoices");
 export const PackagesDBPath = firestore().collection("Packages");
 export const CategoryDBPath = firestore().collection("FoodCategory");
 export const RatingDBPath = firestore().collection("Rating");
-export const WhishlistDBPath = firestore().collection("Wishlist");
 
 export const AdminDBFields = {
     createdAt: 'createdAt',
@@ -117,8 +116,4 @@ export const RatingDBFields = {
     review: 'review',
     time: 'time',
     userId: 'userId',
-}
-
-export const WhishlistDBFields = {
-    restList: 'restList',
 }

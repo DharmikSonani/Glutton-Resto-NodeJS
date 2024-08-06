@@ -141,19 +141,19 @@ const RestarantDetailScreen = (props) => {
                         />
 
                         <Menu
-                            restId={data[RestaurantDBFields.restId]}
+                            restId={data?.uid}
                             height={windowHeight}
                             width={windowWidth}
                         />
 
                         <Reviews
-                            restId={data[RestaurantDBFields.restId]}
+                            restId={data?.uid}
                             height={windowHeight}
                             width={windowWidth}
                         />
 
                         <Photos
-                            restId={data[RestaurantDBFields.restId]}
+                            restId={data?.uid}
                             height={windowHeight}
                             width={windowWidth}
                         />
@@ -165,7 +165,7 @@ const RestarantDetailScreen = (props) => {
                 {
                     reviewModalVisible &&
                     <AddReviewModal
-                        restId={data[RestaurantDBFields.restId]}
+                        restId={data?.uid}
                         modalVisible={reviewModalVisible}
                         setModalVisible={setReviewModalVisibility}
                     />

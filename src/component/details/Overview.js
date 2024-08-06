@@ -11,7 +11,7 @@ import CustomButton from '../button/CustomButton'
 
 const Overview = ({ navigation, data, width, }) => {
 
-    const isActive = data[RestaurantDBFields.isActive] == 'true';
+    const isActive = data[RestaurantDBFields.isActive] == true;
 
     const DisplayData = [
         {
@@ -41,7 +41,7 @@ const Overview = ({ navigation, data, width, }) => {
             onPress: () => {
                 navigation.navigate(NavigationScreens.BookTableScreen,
                     {
-                        restId: data[RestaurantDBFields.restId],
+                        restId: data?.uid,
                         restName: data[RestaurantDBFields.restaurantName],
                         openTime: data[RestaurantDBFields.openTime],
                         closeTime: data[RestaurantDBFields.closeTime],

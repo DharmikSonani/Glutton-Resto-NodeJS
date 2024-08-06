@@ -15,7 +15,7 @@ const AddReviewModal = ({
     setModalVisible,
 }) => {
 
-    const uid = useSelector(state => state[Reducers.AuthReducer]);
+    const userData = useSelector(state => state[Reducers.UserDataReducer]);
 
     const [rating, setRating] = useState(0);
     const [desc, setDesc] = useState('');
@@ -57,7 +57,7 @@ const AddReviewModal = ({
             data['restId'] = restId;
             data['review'] = desc;
             data['rating'] = rating;
-            data['userId'] = uid;
+            data['userId'] = userData._id;
 
             const res = await addRatingAPI(data);
 

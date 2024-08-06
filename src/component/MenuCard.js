@@ -5,7 +5,6 @@ import { COLOR } from '../constants/Colors';
 
 const MenuCard = ({
     data,
-    itemList,
     inputRange,
     AnimatedValue,
     zIndex,
@@ -39,19 +38,19 @@ const MenuCard = ({
         >
 
             <FastImage
-                source={{ uri: data.menuCardImg }}
+                source={{ uri: data.img }}
                 style={styles.BackgroundImage}
                 resizeMode='cover'
             />
             <View style={styles.ContentContainer}>
                 {
-                    itemList && itemList.map((item, i) => {
+                    data?.items && data?.items.map((item, i) => {
                         return (
                             <View
                                 key={i}
                                 style={[styles.ItemContainer]}
                             >
-                                <Text style={{ color: data.fontColor, fontSize: 12, flex: 1, }} numberOfLines={1}>{item.itemName}</Text>
+                                <Text style={{ color: data.fontColor, fontSize: 12, flex: 1, }} numberOfLines={1}>{item.name}</Text>
                                 <Text style={{ color: data.fontColor, fontSize: 12, }} numberOfLines={1}>₹{item.price}</Text>
                             </View>
                         )

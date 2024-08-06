@@ -3,12 +3,11 @@ import React, { useEffect, useRef, useState, } from 'react'
 import MenuCard from '../MenuCard';
 import { COLOR } from '../../constants/Colors';
 import { headerStyle } from '../../constants/Styles';
-import { CategoryDBFields, CategoryDBPath, RestaurantDBFields, RestaurantDBPath } from '../../constants/Database';
 import { Directions, Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { getMenuByRestIDAPI } from '../../api/utils';
 
 const Menu = ({ restId, height, width, }) => {
 
-    const [categories, setCategories] = useState([]);
     const [data, setData] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -16,44 +15,13 @@ const Menu = ({ restId, height, width, }) => {
     const reactiveAnimated = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        fetchCategories();
+        fetchMenu();
     }, [])
 
-    const fetchCategories = () => {
+    const fetchMenu = async () => {
         try {
-            RestaurantDBPath
-                .doc(restId)
-                .collection('Menu')
-                .orderBy(RestaurantDBFields.Menu.category, "asc")
-                .orderBy(RestaurantDBFields.Menu.itemName, "asc")
-                .onSnapshot((querySnap) => {
-                    let catList = [];
-                    let catDataList = [];
-                    querySnap.docs.map(async (doc) => {
-
-                        catDataList.push(doc.data());
-
-                        const { category } = doc.data();
-                        !catList.some(o => o == category) && catList.push(category);
-                    })
-                    if (catList.length > 0) {
-                        try {
-                            CategoryDBPath
-                                .where(CategoryDBFields.catName, 'in', catList)
-                                .orderBy(CategoryDBFields.catName, 'asc')
-                                .get()
-                                .then((querySnap) => {
-                                    const list = querySnap.docs.map((doc) => {
-                                        return doc.data();
-                                    })
-                                    setCategories(list);
-                                })
-                        } catch (e) {
-                            console.log(e);
-                        }
-                    }
-                    setData(catDataList);
-                })
+            const res = await getMenuByRestIDAPI(restId);
+            res?.data && setData(res?.data?.data);
         } catch (e) {
             console.log(e);
         }
@@ -72,7 +40,7 @@ const Menu = ({ restId, height, width, }) => {
     }, [activeIndex])
 
     const setActiveSlide = (newIndex) => {
-        if (newIndex == categories.length) {
+        if (newIndex == data.length) {
             setActiveIndex(0);
             reactiveAnimated.setValue(0);
         } else {
@@ -94,25 +62,24 @@ const Menu = ({ restId, height, width, }) => {
         .Fling()
         .direction(Directions.DOWN)
         .onStart(() => {
-            if (activeIndex < categories.length) {
+            if (activeIndex < data.length) {
                 setActiveSlide(activeIndex + 1);
             }
         });
 
     return (
-        categories.length > 0 ?
+        (data && data.length > 0) ?
             <GestureHandlerRootView style={{ width: width, height: height, }}>
                 <GestureDetector gesture={Gesture.Simultaneous(flingUp, flingDown)}>
                     <View style={[styles.Container]}>
                         {
-                            categories.map((item, index) => {
+                            data.map((item, index) => {
                                 const inputRange = [index - 1, index, index + 1];
                                 return (
                                     <MenuCard
                                         key={index}
                                         data={item}
-                                        itemList={data.filter((i) => i[RestaurantDBFields.Menu.category] == item[CategoryDBFields.catName])}
-                                        zIndex={categories.length - index}
+                                        zIndex={data.length - index}
                                         AnimatedValue={AnimatedValue}
                                         inputRange={inputRange}
                                         height={height}
@@ -125,7 +92,7 @@ const Menu = ({ restId, height, width, }) => {
             </GestureHandlerRootView>
             :
             <View style={{ width: width, height: height, alignItems: 'center', justifyContent: 'center', paddingBottom: headerStyle.height / 2, }}>
-                <Text style={{ color: COLOR.BLACK_30 }}>Menu Items Not Found</Text>
+                <Text style={{ color: COLOR.BLACK_30 }}>Menu Not Found</Text>
             </View>
 
     )

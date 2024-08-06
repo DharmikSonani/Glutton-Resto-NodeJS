@@ -17,6 +17,10 @@ const GET_PHOTOS_URL = `${RESTAURANT_BASE_URL}/photo`;
 const RATING_BASE_URL = `${BASE_URL}/rating`;
 const ADD_RATING_URL = `${RATING_BASE_URL}/add`;
 
+const MENU_ITEM_BASE_URL = `${BASE_URL}/menu-item`;
+const WHOLE_MENU_URL = `${MENU_ITEM_BASE_URL}/menu`;
+
+
 // POST
 
 
@@ -38,6 +42,11 @@ export const getRestaurantReviewsAPI = async (id) => {
 
 export const getRestaurantPhotosAPI = async (id) => {
     const res = await axios.get(`${GET_PHOTOS_URL}/${id}`);
+    return res;
+}
+
+export const getMenuByRestIDAPI = async (id) => {
+    const res = await axios.get(`${WHOLE_MENU_URL}/${id}`);
     return res;
 }
 

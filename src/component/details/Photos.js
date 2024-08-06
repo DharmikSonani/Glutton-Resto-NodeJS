@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, ScrollView, } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import FastImage from 'react-native-fast-image';
-import { RestaurantDBFields, RestaurantDBPath } from '../../constants/Database';
 import { COLOR } from '../../constants/Colors';
 import { headerStyle } from '../../constants/Styles';
+import { getRestaurantPhotosAPI } from '../../api/utils';
 
 const Photos = ({ restId, height, width }) => {
 
@@ -16,19 +16,8 @@ const Photos = ({ restId, height, width }) => {
 
     const fetchData = async () => {
         try {
-            RestaurantDBPath
-                .doc(restId)
-                .collection('Images')
-                .orderBy(RestaurantDBFields.Images.addedAt, 'desc')
-                .onSnapshot((querySnap) => {
-                    const list = [];
-                    querySnap.docs.map((doc, i) => {
-                        const id = i + 1;
-                        const { imgUrl } = doc.data();
-                        list.push({ id, imgUrl });
-                    })
-                    setData(list);
-                })
+            const res = await getRestaurantPhotosAPI(restId);
+            res?.data && setData(res?.data?.data?.images);
         } catch (e) {
             console.log(e);
         }
@@ -50,7 +39,7 @@ const Photos = ({ restId, height, width }) => {
                                     <SkeletonPlaceholder borderRadius={4} speed={1000}>
                                         <View style={styles.ImageStyle} />
                                     </SkeletonPlaceholder>
-                                    <FastImage source={{ uri: image.imgUrl }} style={[styles.ImageStyle, { position: 'absolute' }]} />
+                                    <FastImage source={{ uri: image }} style={[styles.ImageStyle, { position: 'absolute' }]} />
                                 </View>
                             )
                         })
@@ -68,7 +57,7 @@ const Photos = ({ restId, height, width }) => {
                                     <SkeletonPlaceholder borderRadius={4} speed={1000}>
                                         <View style={styles.ImageStyle} />
                                     </SkeletonPlaceholder>
-                                    <FastImage source={{ uri: image.imgUrl }} style={[styles.ImageStyle, { position: 'absolute' }]} />
+                                    <FastImage source={{ uri: image }} style={[styles.ImageStyle, { position: 'absolute' }]} />
                                 </View>
                             )
                         })

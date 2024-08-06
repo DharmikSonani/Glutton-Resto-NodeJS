@@ -12,6 +12,7 @@ const MANAGE_FAVORITE_URL = `${CUSTOMER_BASE_URL}/manage-favorite`;
 const RESTAURANT_BASE_URL = `${BASE_URL}/restaurant`;
 const ACTIVE_RESTAURANT_URL = `${RESTAURANT_BASE_URL}/active`;
 const FAVOURITE_RESTAURANT_URL = `${RESTAURANT_BASE_URL}/favourite`;
+const GET_PHOTOS_URL = `${RESTAURANT_BASE_URL}/photo`;
 
 const RATING_BASE_URL = `${BASE_URL}/rating`;
 const ADD_RATING_URL = `${RATING_BASE_URL}/add`;
@@ -32,6 +33,11 @@ export const getActiveRestaurantsAPI = async () => {
 
 export const getRestaurantReviewsAPI = async (id) => {
     const res = await axios.get(`${RATING_BASE_URL}/${id}`);
+    return res;
+}
+
+export const getRestaurantPhotosAPI = async (id) => {
+    const res = await axios.get(`${GET_PHOTOS_URL}/${id}`);
     return res;
 }
 

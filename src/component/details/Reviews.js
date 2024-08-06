@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ReviewCard from '../ReviewCard';
-import moment from 'moment';
 import { COLOR } from '../../constants/Colors';
 import { headerStyle } from '../../constants/Styles';
-import { RatingDBFields, RatingDBPath } from '../../constants/Database';
+import { getRestaurantReviewsAPI } from '../../api/utils';
 
 const Reviews = ({ restId, height, width, }) => {
 
@@ -14,31 +13,21 @@ const Reviews = ({ restId, height, width, }) => {
         fetchData();
     }, [])
 
-    const fetchData = () => {
+    const fetchData = async () => {
         try {
-            RatingDBPath
-                .orderBy(RatingDBFields.time, 'desc')
-                .where(RatingDBFields.restId, '==', restId)
-                .onSnapshot((querySnap) => {
-                    const list = querySnap.docs.map((doc, i) => {
-                        const { rating, review, time, userId } = doc.data();
-                        timeStamp = moment(time.toDate()).fromNow();
-                        return { rating, review, timeStamp, userId, i }
-                    })
-                    setData(list);
-                })
+            const res = await getRestaurantReviewsAPI(restId);
+            res?.data && setData(res.data?.data)
         } catch (e) {
             console.log(e);
         }
     }
-
 
     return (
         data.length > 0 ?
             <FlatList
                 data={data}
                 renderItem={({ item }) => <ReviewCard data={item} />}
-                keyExtractor={item => item.i}
+                keyExtractor={item => item._id}
                 showsVerticalScrollIndicator={false}
                 style={{ width: width, height: height, }}
                 contentContainerStyle={{ padding: 15, paddingBottom: 5, }}

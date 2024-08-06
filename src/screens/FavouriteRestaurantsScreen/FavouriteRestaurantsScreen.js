@@ -27,7 +27,7 @@ const FavouriteRestaurantsScreen = (props) => {
             <FlatList
                 data={restList}
                 renderItem={({ item }) => <RestoCard data={item} navigation={navigation} />}
-                keyExtractor={item => item.restId}
+                keyExtractor={item => item._id}
                 showsVerticalScrollIndicator={false}
                 style={styles.Container}
                 contentContainerStyle={[styles.ContentContainerStyle, { paddingBottom: bottomTabHeight + 5 }]}

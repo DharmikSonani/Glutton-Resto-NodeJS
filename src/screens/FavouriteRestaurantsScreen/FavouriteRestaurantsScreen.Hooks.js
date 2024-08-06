@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Reducers } from '../../constants/Strings';
 import { useSelector } from 'react-redux';
-import { RestaurantDBFields, RestaurantDBPath } from '../../constants/Database';
+import { getFavouriteRestaurantsAPI } from '../../api/utils';
 
 const useScreenHooks = (props) => {
 
@@ -19,16 +19,13 @@ const useScreenHooks = (props) => {
     }, [favlist])
 
     // Methods
-    const fetchRestData = (restList) => {
+    const fetchRestData = async (restList) => {
         if (restList.length > 0) {
             try {
-                RestaurantDBPath
-                    .where(RestaurantDBFields.restId, 'in', restList)
-                    .orderBy(RestaurantDBFields.rate, "desc")
-                    .onSnapshot((querySnap) => {
-                        const list = querySnap.docs.map(doc => doc.data())
-                        setRestList(list);
-                    })
+                let params = {};
+                params['restList'] = restList;
+                const res = await getFavouriteRestaurantsAPI(params);
+                res?.data && setRestList(res?.data?.data);
             } catch (e) {
                 console.log(e);
             }

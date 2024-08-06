@@ -50,7 +50,7 @@ const RestoCard = ({ data, navigation, }) => {
             </View>
 
             <View style={styles.Button}>
-                <FavouriteButton restId={data.restId} />
+                <FavouriteButton restId={data.uid} />
             </View>
         </TouchableOpacity>
     )

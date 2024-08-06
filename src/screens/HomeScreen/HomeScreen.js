@@ -223,7 +223,7 @@ const HomeScreen = (props) => {
 
                             </TouchableOpacity>
                         }
-                        keyExtractor={item => item.restId}
+                        keyExtractor={item => item._id}
                         showsVerticalScrollIndicator={false}
                         ListEmptyComponent={<Text style={styles.TextStyle}>Restaurant Not Found</Text>}
                         style={{ flex: 1, }}

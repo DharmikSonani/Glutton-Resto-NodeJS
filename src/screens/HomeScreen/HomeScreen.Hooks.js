@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { NavigationScreens, Reducers } from '../../constants/Strings';
+import { Reducers } from '../../constants/Strings';
 import { Animated, Dimensions, Keyboard, PermissionsAndroid, Platform } from 'react-native';
 import { useEffect, useState } from 'react';
 import Geolocation from 'react-native-geolocation-service'
-import { RestaurantDBFields, RestaurantDBPath } from '../../constants/Database';
+import { getActiveRestaurantsAPI } from '../../api/utils';
 
 const useScreenHooks = (props) => {
 
@@ -34,17 +34,10 @@ const useScreenHooks = (props) => {
     }, [])
 
     // Methods
-    const fetchData = () => {
+    const fetchData = async () => {
         try {
-            RestaurantDBPath
-                .orderBy(RestaurantDBFields.rate, "desc")
-                .where(RestaurantDBFields.isActive, '==', 'true')
-                .onSnapshot((querySnap) => {
-                    const list = querySnap.docs.map(doc => {
-                        return doc.data();
-                    })
-                    setData(list);
-                })
+            const res = await getActiveRestaurantsAPI();
+            res?.data && setData(res?.data?.data);
         } catch (e) {
             console.log(e);
         }
@@ -154,7 +147,7 @@ const useScreenHooks = (props) => {
         setSearch(item.restaurantName);
         setSearchList([]);
 
-        const markerID = data.findIndex(obj => obj.restId == item.restId);
+        const markerID = data.findIndex(obj => obj.uid == item.uid);
         const x = (markerID * width);
 
         mapAnimation.setValue(x);

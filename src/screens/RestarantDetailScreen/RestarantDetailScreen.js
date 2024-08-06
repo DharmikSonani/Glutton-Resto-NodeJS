@@ -46,7 +46,7 @@ const RestarantDetailScreen = (props) => {
                 title={data[RestaurantDBFields.restaurantName]}
                 rightButton={
                     <FavouriteButton
-                        restId={data[RestaurantDBFields.restId]}
+                        restId={data.uid}
                         style={styles.FavButton}
                     />
                 }

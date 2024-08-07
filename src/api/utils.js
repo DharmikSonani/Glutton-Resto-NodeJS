@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const DOMAIN = `http://192.168.1.4:8000/`;
+// export const DOMAIN = `http://192.168.1.4:8000/`; // Sonani 5G
+export const DOMAIN = `http://192.168.29.208:8000/`; // Miyani 5G
 // export const DOMAIN = `https://glutton-server.vercel.app/`;
 const BASE_URL = `${DOMAIN}api/`;
 
@@ -19,6 +20,10 @@ const ADD_RATING_URL = `${RATING_BASE_URL}/add`;
 
 const MENU_ITEM_BASE_URL = `${BASE_URL}/menu-item`;
 const WHOLE_MENU_URL = `${MENU_ITEM_BASE_URL}/menu`;
+
+const BOOKINGS_BASE_URL = `${BASE_URL}/booking`;
+const BOOKINGS_TIMESLOT_URL = `${BOOKINGS_BASE_URL}/timeslot`;
+const BOOK_TABLE_URL = `${BOOKINGS_BASE_URL}/add`;
 
 
 // POST
@@ -59,6 +64,16 @@ export const getFavouriteRestaurantsAPI = async (params) => {
 
 export const addRatingAPI = async (params) => {
     const res = await axios.post(`${ADD_RATING_URL}`, params);
+    return res;
+}
+
+export const bookTableAPI = async (params) => {
+    const res = await axios.post(`${BOOK_TABLE_URL}`, params);
+    return res;
+}
+
+export const getBookingTimeSlot = async (params) => {
+    const res = await axios.post(`${BOOKINGS_TIMESLOT_URL}`, params);
     return res;
 }
 

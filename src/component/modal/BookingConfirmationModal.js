@@ -6,7 +6,7 @@ import FieldValuePairLabel from '../FieldValuePairLabel';
 import DataDisplayCard from '../DataDisplayCard';
 import moment from 'moment';
 import { format } from 'date-fns';
-import { BookingsDBPath, CustomerDBFields } from '../../constants/Database';
+import { CustomerDBFields } from '../../constants/Database';
 import CustomButton from '../button/CustomButton';
 import { NormalSnackBar } from '../../constants/SnackBars';
 import { BookingDoneVideo } from '../../constants/Assets';
@@ -14,6 +14,7 @@ import Video from 'react-native-video';
 import FieldValuePairInput from '../input/FieldValuePairInput';
 import { keyboardType } from '../../constants/Strings';
 import { emailRegEx } from '../../constants/RegularExpression';
+import { bookTableAPI } from '../../api/utils';
 
 const width = Dimensions.get('window').width * 0.9;
 
@@ -37,7 +38,7 @@ const BookingConfirmationModal = ({
     const [phoneNo, setPhoneNo] = useState(userData && userData[CustomerDBFields.contactNo]);
     const [email, setEmail] = useState(userData && userData[CustomerDBFields.email]);
 
-    const onConfirmPress = () => {
+    const onConfirmPress = async () => {
 
         if (!name) {
             NormalSnackBar('Enter Name.');
@@ -65,31 +66,41 @@ const BookingConfirmationModal = ({
         }
 
         try {
+            const params = {
+                "restaurant": {
+                    "uid": restId,
+                    "name": restName,
+                },
+                "customer": {
+                    "uid": userData.uid,
+                    "name": name,
+                    "email": email,
+                    "contact": phoneNo,
+                },
+                "booking": {
+                    "discount": discount,
+                    "noOfGuest": noGuest,
+                    "time": moment(time, ['HH:mm A']).format('HH:mm').toString(),
+                    "date": date,
+                },
+                "isCancel": false,
+                "isVerify": false
+            };
+
             setLoading(true);
-            BookingsDBPath
-                .doc()
-                .set({
-                    restId: restId,
-                    custId: userData[CustomerDBFields.userId],
-                    date: date,
-                    isCancel: 'false',
-                    noOfGuest: noGuest,
-                    time: moment(time, ['HH:mm A']).format('HH:mm').toString(),
-                    custContactNo: phoneNo,
-                    custEmail: email,
-                    custName: name,
-                    restName: restName,
-                    isVerify: 'false',
-                    discount: discount,
-                }).then(() => {
-                    setIsDone(true);
-                    setTimeout(() => {
-                        setModalVisible(false);
-                        setLoading(false);
-                        setIsDone(false);
-                    }, 2400);
-                    onSuccess();
-                })
+            const res = await bookTableAPI(params);
+            if (res?.data && res?.data?.status == true) {
+                setIsDone(true);
+                setTimeout(() => {
+                    setModalVisible(false);
+                    setLoading(false);
+                    setIsDone(false);
+                }, 2400);
+                onSuccess();
+            } else {
+                setLoading(false);
+                NormalSnackBar('Something wents wrong.');
+            }
         } catch (e) {
             console.log(e);
             setLoading(false);

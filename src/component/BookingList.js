@@ -59,7 +59,7 @@ const BookingList = ({
     return (
         <View style={styles.Container}>
 
-            <Text style={styles.DateText}>{date && format(new Date(date), 'MMMM d, yyyy')}</Text>
+            <Text style={styles.DateText} numberOfLines={1}>{date && format(new Date(date), 'MMMM d, yyyy')}</Text>
 
             {
                 currentDate == date &&
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.BORDERCOLOR,
         borderRadius: 7,
         overflow: 'hidden',
-        width: '35%',
+        maxWidth: '50%',
         textAlign: 'center',
     },
     TodayContainer: {

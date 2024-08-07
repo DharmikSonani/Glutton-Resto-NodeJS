@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { COLOR, GRADIENTCOLOR } from '../../constants/Colors'
 import { format } from 'date-fns'
 import moment from 'moment'
-import { BookingsDBFields, BookingsDBPath } from '../../constants/Database'
 import LinearGradient from 'react-native-linear-gradient'
 import { NormalSnackBar } from '../../constants/SnackBars'
+import { getBookingTimeSlot } from '../../api/utils'
 
 const width = Dimensions.get('window').width - 70;
 
@@ -50,21 +50,18 @@ const TimeController = ({
         fetchBookings(date, fromTime);
     }
 
-    const fetchBookings = (date, ot = openTime) => {
+    const fetchBookings = async (date, ot = openTime) => {
         try {
-            BookingsDBPath
-                .where(BookingsDBFields.restId, '==', restId)
-                .where(BookingsDBFields.date, '==', date)
-                .where(BookingsDBFields.isCancel, '==', 'false')
-                .onSnapshot((querySnap) => {
-                    setTimeLoading(true);
-                    onSelectTime('');
-                    const list = querySnap.docs.map((doc) => {
-                        const { time } = doc.data();
-                        return (time)
-                    })
-                    setTimeSlot(createTimeSlots(ot, closeTime, list));
-                })
+            let params = {};
+            params['restId'] = restId;
+            params['date'] = date;
+            const res = await getBookingTimeSlot(params);
+            if (res?.data) {
+                const list = res?.data?.data;
+                setTimeLoading(true);
+                onSelectTime('');
+                setTimeSlot(createTimeSlots(ot, closeTime, list));
+            }
         } catch (error) {
             console.log(error)
         }

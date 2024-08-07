@@ -25,7 +25,6 @@ const BookingConfirmationModal = ({
     date,
     time,
     noGuest,
-    discount,
     modalVisible,
     setModalVisible,
     onSuccess,
@@ -78,7 +77,6 @@ const BookingConfirmationModal = ({
                     "contact": phoneNo,
                 },
                 "booking": {
-                    "discount": discount,
                     "noOfGuest": noGuest,
                     "time": moment(time, ['HH:mm A']).format('HH:mm').toString(),
                     "date": date,

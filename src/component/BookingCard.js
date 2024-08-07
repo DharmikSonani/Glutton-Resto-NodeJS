@@ -1,6 +1,5 @@
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect } from 'react'
-
+import React from 'react'
 import QRCode from 'react-native-qrcode-svg';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment/moment';
@@ -15,21 +14,12 @@ const BookingCard = ({
     data,
     onPress,
     onCancelBooking,
-    currentDate,
-    currentTime,
 }) => {
-
-    useEffect(() => {
-        if (data.isVerify == 'false' && data.isCancel == 'false') {
-            new Date(currentDate) > new Date(data.date) && onCancelBooking(data.docId);
-            new Date(currentDate) >= new Date(data.date) && moment(currentTime, ['HH:mm']).format('HH:mm') > moment(data.time, ['HH:mm']).format('HH:mm') && onCancelBooking(data.docId);
-        }
-    }, [])
 
     return (
         <View style={styles.Container}>
 
-            <Text style={styles.RestNameText} numberOfLines={1}>{data.restName}</Text>
+            <Text style={styles.RestNameText} numberOfLines={1}>{data?.restaurant?.name}</Text>
 
             <View style={styles.DiscountContainer}>
                 <LinearGradient
@@ -38,7 +28,7 @@ const BookingCard = ({
                     angle={110}
                     useAngle
                 >
-                    <Text style={styles.DiscountText} numberOfLines={1}>{data.discount} % Off</Text>
+                    <Text style={styles.DiscountText} numberOfLines={1}>{data?.booking?.discount}% Off</Text>
                 </LinearGradient>
             </View>
 
@@ -47,13 +37,13 @@ const BookingCard = ({
                 <View style={styles.DetailsContainer}>
 
                     <View style={{ flex: 1, marginBottom: 15, }}>
-                        <Text style={styles.IdText} numberOfLines={1}>Booking ID : {data.docId}</Text>
-                        <Text style={styles.TextStyle} numberOfLines={1}>Booking Time : {moment(data.time, ['hh:mm']).format('hh:mm A')}</Text>
-                        <Text style={styles.TextStyle} numberOfLines={1}>Guest : {data.noOfGuest}</Text>
+                        <Text style={styles.IdText} numberOfLines={1}>Booking ID : {data?._id}</Text>
+                        <Text style={styles.TextStyle} numberOfLines={1}>Booking Time : {moment(data?.booking?.time, ['hh:mm']).format('hh:mm A')}</Text>
+                        <Text style={styles.TextStyle} numberOfLines={1}>Guest : {data?.booking?.noOfGuest}</Text>
                     </View>
 
                     {
-                        data.isVerify == 'false' && data.isCancel == 'false' &&
+                        data?.isVerify == false && data?.isCancel == false &&
                         <CustomButton
                             colors={GRADIENTCOLOR.CANCELLED}
                             text={'Cancel Booking'}
@@ -74,7 +64,7 @@ const BookingCard = ({
                     }
 
                     {
-                        data.isVerify == 'false' && data.isCancel == 'true' &&
+                        data.isVerify == false && data.isCancel == true &&
                         <View style={styles.BookingStatusContainer}>
                             <SimpleLineIcons name='close' size={15} color={COLOR.CANCELLED} />
                             <Text style={[styles.BookingStatusText, { color: COLOR.CANCELLED }]}>Cancelled</Text>
@@ -82,7 +72,7 @@ const BookingCard = ({
                     }
 
                     {
-                        data.isVerify == 'true' && data.isCancel == 'false' &&
+                        data.isVerify == true && data.isCancel == false &&
                         <View style={styles.BookingStatusContainer}>
                             <Octicons name='issue-closed' size={15} color={COLOR.VERIFIED} />
                             <Text style={[styles.BookingStatusText, { color: COLOR.VERIFIED }]}>Verified</Text>
@@ -95,7 +85,7 @@ const BookingCard = ({
                     onPress={() => onPress(data)}
                 >
                     <QRCode
-                        value={data.docId}
+                        value={data?._id}
                         size={80}
                     />
                 </TouchableOpacity>

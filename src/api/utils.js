@@ -5,7 +5,6 @@ export const DOMAIN = `http://192.168.29.208:8000/`; // Miyani 5G
 // export const DOMAIN = `https://glutton-server.vercel.app/`;
 const BASE_URL = `${DOMAIN}api/`;
 
-// GET
 const CUSTOMER_BASE_URL = `${BASE_URL}/customer`;
 const CUSTOMER_UPDATE_URL = `${CUSTOMER_BASE_URL}/update`;
 const MANAGE_FAVORITE_URL = `${CUSTOMER_BASE_URL}/manage-favorite`;
@@ -26,12 +25,14 @@ const BOOKINGS_TIMESLOT_URL = `${BOOKINGS_BASE_URL}/timeslot`;
 const BOOK_TABLE_URL = `${BOOKINGS_BASE_URL}/add`;
 
 
-// POST
-
-
 // GET
 export const getCustomerByUidAPI = async (uid) => {
     const res = await axios.get(`${CUSTOMER_BASE_URL}/${uid}`);
+    return res;
+}
+
+export const getBookingsByUidAPI = async (uid) => {
+    const res = await axios.get(`${BOOKINGS_BASE_URL}/${uid}`);
     return res;
 }
 

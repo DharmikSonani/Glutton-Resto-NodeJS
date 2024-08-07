@@ -1,68 +1,29 @@
 import { StyleSheet, Text, View, FlatList, } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { format } from 'date-fns';
 import LinearGradient from 'react-native-linear-gradient';
-import moment from 'moment/moment';
-import { useIsFocused } from '@react-navigation/native';
 import { COLOR, GRADIENTCOLOR } from '../constants/Colors';
 import QRCodeModal from './modal/QRCodeModal';
 import BookingCard from './BookingCard';
-import { BookingsDBFields, BookingsDBPath } from '../constants/Database';
 
 const BookingList = ({
-    date,
-    currentDate,
-    uid,
+    data,
 }) => {
 
-    const currentTime = moment(new Date()).format('HH:mm').toString();
-    const isFocused = useIsFocused();
-
-    const [bookings, setBookings] = useState([]);
+    const bookings = data ? data.bookings : [];
     const [selectedBooking, setSelectedBooking] = useState({});
 
-    useEffect(() => {
-        isFocused && getBookings();
-    }, [isFocused])
+    const onCancelBooking = () => {
 
-    const getBookings = async () => {
-        try {
-            BookingsDBPath
-                .where(BookingsDBFields.date, '==', date)
-                .where(BookingsDBFields.custId, '==', uid)
-                .orderBy(BookingsDBFields.time, 'desc')
-                .onSnapshot((querySnap) => {
-                    const list = querySnap.docs.map((doc, i) => {
-                        const docId = doc.id;
-                        return { docId, ...doc.data() };
-                    })
-                    setBookings(list);
-                    setSelectedBooking({});
-                })
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    const onCancelBooking = (docId) => {
-        try {
-            BookingsDBPath
-                .doc(docId)
-                .update({
-                    isCancel: 'true',
-                })
-        } catch (e) {
-            console.log(e);
-        }
     }
 
     return (
         <View style={styles.Container}>
 
-            <Text style={styles.DateText} numberOfLines={1}>{date && format(new Date(date), 'MMMM d, yyyy')}</Text>
+            <Text style={styles.DateText} numberOfLines={1}>{data?.date && format(new Date(data?.date), 'MMMM d, yyyy')}</Text>
 
             {
-                currentDate == date &&
+                data?.today &&
                 <View style={styles.TodayContainer}>
                     <LinearGradient
                         colors={GRADIENTCOLOR.BLACK_50_100_100_100}
@@ -81,14 +42,12 @@ const BookingList = ({
                 data={bookings}
                 renderItem={({ item }) =>
                     <BookingCard
-                        data={{ ...item, date }}
+                        data={item}
                         onPress={setSelectedBooking}
                         onCancelBooking={onCancelBooking}
-                        currentDate={currentDate}
-                        currentTime={currentTime}
                     />
                 }
-                keyExtractor={item => item.docId}
+                keyExtractor={item => item._id}
                 scrollEnabled={false}
             />
 

@@ -16,7 +16,7 @@ const QRCodeModal = ({
     setModalVisible,
 }) => {
 
-    const docId = data?.docId;
+    const docId = data?._id;
 
     return (
         <Modal
@@ -30,7 +30,7 @@ const QRCodeModal = ({
                 <View style={styles.Container}>
 
                     <DataDisplayCard
-                        title={data?.restName}
+                        title={data?.restaurant?.name}
                         style={{ maxWidth: width + 30 }}
                     >
 
@@ -41,32 +41,32 @@ const QRCodeModal = ({
 
                         <FieldValuePairLabel
                             field={'Book By'}
-                            value={data?.custName}
+                            value={data?.customer?.name}
                         />
 
                         <FieldValuePairLabel
                             field={'Contact No.'}
-                            value={`+91 ${data?.custContactNo}`}
+                            value={`+91 ${data?.customer?.contact}`}
                         />
 
                         <FieldValuePairLabel
                             field={'Email'}
-                            value={data?.custEmail}
+                            value={data?.customer?.email}
                         />
 
                         <FieldValuePairLabel
                             field={'Guest'}
-                            value={data?.noOfGuest}
+                            value={data?.booking?.noOfGuest}
                         />
 
                         <FieldValuePairLabel
                             field={'Date'}
-                            value={data?.date && format(new Date(data?.date), 'MMMM d, yyyy')}
+                            value={data?.booking?.date && format(new Date(data?.booking?.date), 'MMMM d, yyyy')}
                         />
 
                         <FieldValuePairLabel
                             field={'Time'}
-                            value={data?.time && moment(data?.time, ['hh:mm']).format('hh:mm A')}
+                            value={data?.booking?.time && moment(data?.booking?.time, ['hh:mm']).format('hh:mm A')}
                             style={{ marginBottom: 0 }}
                         />
 

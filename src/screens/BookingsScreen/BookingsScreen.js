@@ -16,10 +16,8 @@ const BookingsScreen = (props) => {
     const {
         navigation,
         bottomTabHeight,
-        currentDate,
-        uid,
 
-        dates,
+        data,
         loading,
 
     } = useScreenHooks(props);
@@ -39,16 +37,11 @@ const BookingsScreen = (props) => {
                     </View>
                     :
                     <FlatList
-                        data={dates}
+                        data={data}
                         renderItem={({ item }) =>
-                            <BookingList
-                                date={item.date}
-                                uid={uid}
-                                currentDate={currentDate}
-                                navigation={navigation}
-                            />
+                            <BookingList data={item} />
                         }
-                        keyExtractor={item => item.i}
+                        keyExtractor={item => item.date}
                         showsVerticalScrollIndicator={false}
                         style={styles.Container}
                         contentContainerStyle={[styles.ContentContainerStyle, { paddingBottom: bottomTabHeight + 10 }]}

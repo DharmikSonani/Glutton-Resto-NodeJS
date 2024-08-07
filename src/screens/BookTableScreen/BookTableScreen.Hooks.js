@@ -2,8 +2,7 @@ import { useSelector } from 'react-redux';
 import { Reducers } from '../../constants/Strings';
 import moment from 'moment';
 import { format } from 'date-fns';
-import { useEffect, useState } from 'react';
-import { BookingsDBFields, BookingsDBPath } from '../../constants/Database';
+import { useState } from 'react';
 import { NormalSnackBar } from '../../constants/SnackBars';
 
 const useScreenHooks = (props) => {
@@ -23,28 +22,11 @@ const useScreenHooks = (props) => {
     const [noGuest, setNoGuest] = useState(1);
     const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd').toString());
     const [time, setTime] = useState('');
-    const [discount, setDiscount] = useState(10);
     const [confirmModalVisible, setConfirmModalVisibility] = useState(false);
 
     // UseEffects
-    useEffect(() => {
-        checkIsFirstBooking();
-    }, [])
 
     // Methods
-    const checkIsFirstBooking = () => {
-        try {
-            BookingsDBPath
-                .where(BookingsDBFields.custId, '==', uid)
-                .get()
-                .then((querySnap) => {
-                    querySnap.empty && setDiscount(30);
-                })
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
     const onBookTablePress = () => {
         if (!date) {
             NormalSnackBar('Select Date.');
@@ -76,7 +58,6 @@ const useScreenHooks = (props) => {
         noGuest, setNoGuest,
         date, setDate,
         time, setTime,
-        discount, setDiscount,
         confirmModalVisible, setConfirmModalVisibility,
 
         onBookTablePress,

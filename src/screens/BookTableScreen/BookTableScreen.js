@@ -27,7 +27,6 @@ const BookTableScreen = (props) => {
         noGuest, setNoGuest,
         date, setDate,
         time, setTime,
-        discount, setDiscount,
         confirmModalVisible, setConfirmModalVisibility,
 
         onBookTablePress,
@@ -81,7 +80,6 @@ const BookTableScreen = (props) => {
                     restName={restName}
                     date={date}
                     time={time}
-                    discount={discount}
                     noGuest={noGuest}
                     modalVisible={confirmModalVisible}
                     setModalVisible={setConfirmModalVisibility}

@@ -5,6 +5,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import { COLOR, GRADIENTCOLOR } from '../constants/Colors';
 import QRCodeModal from './modal/QRCodeModal';
 import BookingCard from './BookingCard';
+import { cancelBookingAPI } from '../api/utils';
+import { NormalSnackBar } from '../constants/SnackBars';
 
 const BookingList = ({
     data,
@@ -13,7 +15,16 @@ const BookingList = ({
     const bookings = data ? data.bookings : [];
     const [selectedBooking, setSelectedBooking] = useState({});
 
-    const onCancelBooking = () => {
+    const onCancelBooking = async (id) => {
+        try {
+            if (id) {
+                const res = await cancelBookingAPI(id);
+                (res?.data && res?.data?.data) ? NormalSnackBar('Booking Cancel.') : NormalSnackBar('Something wents wrong.');
+            }
+        } catch (error) {
+            console.log(error);
+            NormalSnackBar('Something wents wrong.');
+        }
 
     }
 

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { isDate } from "date-fns/fp";
 
-export const DOMAIN = `http://192.168.1.4:8000/`; // Sonani 5G
+// export const DOMAIN = `http://192.168.1.4:8000/`; // Sonani 5G
 // export const DOMAIN = `http://192.168.29.208:8000/`; // Miyani 5G
-// export const DOMAIN = `https://glutton-server.vercel.app/`;
+export const DOMAIN = `https://glutton-server.vercel.app/`;
 const BASE_URL = `${DOMAIN}api/`;
 
 const CUSTOMER_BASE_URL = `${BASE_URL}/customer`;
@@ -23,7 +24,8 @@ const WHOLE_MENU_URL = `${MENU_ITEM_BASE_URL}/menu`;
 const BOOKINGS_BASE_URL = `${BASE_URL}/booking`;
 const BOOKINGS_TIMESLOT_URL = `${BOOKINGS_BASE_URL}/timeslot`;
 const BOOK_TABLE_URL = `${BOOKINGS_BASE_URL}/add`;
-
+const CANCEL_BOOKING_URL = `${BOOKINGS_BASE_URL}/cancel`;
+const VERIFY_BOOKING_URL = `${BOOKINGS_BASE_URL}/verify`;
 
 // GET
 export const getCustomerByUidAPI = async (uid) => {
@@ -86,5 +88,15 @@ export const updateCustomerByUidAPI = async (uid, params) => {
 
 export const manageFavoriteByUidAPI = async (uid, params) => {
     const res = await axios.patch(`${MANAGE_FAVORITE_URL}/${uid}`, params);
+    return res;
+}
+
+export const cancelBookingAPI = async (id) => {
+    const res = await axios.patch(`${CANCEL_BOOKING_URL}/${id}`);
+    return res;
+}
+
+export const verifyBookingAPI = async (id) => {
+    const res = await axios.patch(`${VERIFY_BOOKING_URL}/${id}`);
     return res;
 }

@@ -53,7 +53,7 @@ const BookingCard = ({
                                     'Are you sure you want to cancel your table booking?',
                                     [
                                         { text: 'No', onPress: () => { } },
-                                        { text: 'Yes', onPress: () => { onCancelBooking(data.docId) } },
+                                        { text: 'Yes', onPress: () => { onCancelBooking(data?._id) } },
                                     ],
                                     { cancelable: true }
                                 )

@@ -1,9 +1,9 @@
 import axios from "axios";
-import { isDate } from "date-fns/fp";
 
 export const DOMAIN = `http://192.168.1.4:8000/`; // Sonani 5G
 // export const DOMAIN = `http://192.168.29.208:8000/`; // Miyani 5G
 // export const DOMAIN = `https://glutton-server.vercel.app/`;
+
 const BASE_URL = `${DOMAIN}api/`;
 
 const CUSTOMER_BASE_URL = `${BASE_URL}/customer`;

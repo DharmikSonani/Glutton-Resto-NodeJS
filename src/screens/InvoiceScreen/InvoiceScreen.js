@@ -16,11 +16,8 @@ const InvoiceScreen = (props) => {
     const {
         navigation,
         invoiceId,
-        data,
 
-        details,
-        items,
-        total,
+        data,
         loading,
     } = useScreenHooks(props);
 
@@ -35,17 +32,18 @@ const InvoiceScreen = (props) => {
                         <ActivityIndicator color={COLOR.BLACK} />
                     </View>
                     :
-                    details?.isComplete == 'true' ?
+                    data?.isGenerated == true ?
                         <ScrollView
                             contentContainerStyle={styles.ContentContainer}
                             showsVerticalScrollIndicator={false}
                         >
                             <Invoice
                                 invoiceId={invoiceId}
-                                details={details}
-                                items={items}
-                                restData={data}
-                                total={total}
+                                items={data?.items}
+                                restData={data?.restaurant}
+                                bookingData={data?.booking}
+                                custData={data?.customer}
+                                total={data?.total}
                             />
                         </ScrollView>
                         :

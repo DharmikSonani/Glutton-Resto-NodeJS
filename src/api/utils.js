@@ -27,6 +27,9 @@ const BOOK_TABLE_URL = `${BOOKINGS_BASE_URL}/add`;
 const CANCEL_BOOKING_URL = `${BOOKINGS_BASE_URL}/cancel`;
 const VERIFY_BOOKING_URL = `${BOOKINGS_BASE_URL}/verify`;
 
+const INVOICE_BASE_URL = `${BASE_URL}/invoice`;
+const INVOICE_LIST_URL = `${INVOICE_BASE_URL}/customer`;
+
 // GET
 export const getCustomerByUidAPI = async (uid) => {
     const res = await axios.get(`${CUSTOMER_BASE_URL}/${uid}`);
@@ -58,6 +61,15 @@ export const getMenuByRestIDAPI = async (id) => {
     return res;
 }
 
+export const getInvoiceListAPI = async (uid) => {
+    const res = await axios.get(`${INVOICE_LIST_URL}/${uid}`);
+    return res;
+}
+
+export const getInvoiceByIDAPI = async (id) => {
+    const res = await axios.get(`${INVOICE_BASE_URL}/${id}`);
+    return res;
+}
 
 // POST
 export const getFavouriteRestaurantsAPI = async (params) => {

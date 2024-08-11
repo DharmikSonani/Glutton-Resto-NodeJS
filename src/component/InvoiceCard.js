@@ -14,10 +14,10 @@ const InvoiceCard = ({
         <View style={styles.Container}>
 
             <View style={styles.ContentContainer}>
-                <Text style={styles.RestNameText} numberOfLines={1}>{data.restName}</Text>
-                <Text style={styles.IdText} numberOfLines={1}>Invoice ID : {data.docId}</Text>
-                <Text style={styles.TextStyle} numberOfLines={1}>Date : {format(new Date(data.date), 'MMMM d,yyyy')}</Text>
-                <Text style={styles.TextStyle} numberOfLines={1}>Booking Time : {moment(data.time, ['hh:mm']).format('hh:mm A')}</Text>
+                <Text style={styles.RestNameText} numberOfLines={1}>{data?.restaurant?.name}</Text>
+                <Text style={styles.IdText} numberOfLines={1}>Invoice ID : {data?.invoiceId}</Text>
+                <Text style={styles.TextStyle} numberOfLines={1}>Date : {data?.booking?.date && format(new Date(data?.booking?.date), 'MMMM d,yyyy')}</Text>
+                <Text style={styles.TextStyle} numberOfLines={1}>Booking Time : {data?.booking?.time && moment(data?.booking?.time, ['hh:mm']).format('hh:mm A')}</Text>
             </View>
 
             <TouchableOpacity

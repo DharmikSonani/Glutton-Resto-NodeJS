@@ -37,7 +37,7 @@ const InvoicesScreen = (props) => {
                     <FlatList
                         data={invoices}
                         renderItem={({ item }) => <InvoiceCard data={item} onPress={onNextPress} />}
-                        keyExtractor={item => item.docId}
+                        keyExtractor={item => item.invoiceId}
                         showsVerticalScrollIndicator={false}
                         style={styles.Container}
                         contentContainerStyle={[styles.ContentContainerStyle]}

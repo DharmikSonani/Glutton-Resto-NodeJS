@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavigationScreens, Reducers } from '../../constants/Strings';
 import { useSelector } from 'react-redux';
-import { InvoiceDBFields, InvoiceDBPath, RestaurantDBPath } from '../../constants/Database';
+import { getInvoiceListAPI } from '../../api/utils';
 
 const useScreenHooks = (props) => {
 
@@ -15,54 +15,28 @@ const useScreenHooks = (props) => {
 
     // UseEffects
     useEffect(() => {
-        fetchRestData();
+        fetchInvoices();
     }, []);
 
     // Methods
-    const fetchInvoices = async (restData) => {
-        setLoading(true);
+    const fetchInvoices = async () => {
         try {
-            InvoiceDBPath
-                .where(InvoiceDBFields.isComplete, '==', 'true')
-                .where(InvoiceDBFields.custId, '==', uid)
-                .orderBy(InvoiceDBFields.generatedAt, 'desc')
-                .onSnapshot((querySnap) => {
-                    let list = [];
-                    querySnap.docs.map((doc, i) => {
-                        const docId = doc.id;
-                        const { custName, time, date, discount, restId } = doc.data();
-                        const rest = restData.filter((i) => i.restId.toLowerCase().includes(restId.toLowerCase()));
-                        const restName = rest[0].restaurantName;
-                        const restContact = rest[0].restContact;
-                        const restEmail = rest[0].restEmail;
-                        list.push({ custName, time, date, docId, discount, restId, restName, restContact, restEmail });
-                    })
-                    setInvocies(list);
-                    setLoading(false);
-                })
+            setLoading(true);
+            const res = await getInvoiceListAPI(uid);
+            if (res && res.data && res?.data?.data) {
+                setInvocies(res?.data?.data);
+                setLoading(false);
+            } else {
+                setLoading(false);
+            }
         } catch (e) {
             console.log(e);
             setLoading(false);
         }
     }
 
-    const fetchRestData = () => {
-        try {
-            RestaurantDBPath
-                .onSnapshot((querySnap) => {
-                    const list = querySnap.docs.map(doc => {
-                        const { restId, restaurantName, contactNo, email } = doc.data()
-                        return ({ restId, restaurantName, restContact: contactNo, restEmail: email })
-                    })
-                    fetchInvoices(list);
-                })
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    const onNextPress = (item) => {
-        navigation.navigate(NavigationScreens.InvoiceScreen, { data: item });
+    const onNextPress = (data) => {
+        navigation.navigate(NavigationScreens.InvoiceScreen, { data: data });
     }
 
     return {

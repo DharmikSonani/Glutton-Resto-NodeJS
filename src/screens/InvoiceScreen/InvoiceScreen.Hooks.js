@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { InvoiceDBFields, InvoiceDBPath } from '../../constants/Database';
 import { getInvoiceByIDAPI } from '../../api/utils';
 
 const useScreenHooks = (props) => {

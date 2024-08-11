@@ -1,31 +1,15 @@
 import { StyleSheet, TouchableOpacity, View, Text, } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react'
 import StarRating from './StarRating'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import FastImage from 'react-native-fast-image';
 import { NavigationScreens } from '../constants/Strings';
 import { COLOR } from '../constants/Colors';
 import FavouriteButton from './button/FavouriteButton';
-import { RestaurantDBFields, RestaurantDBPath } from '../constants/Database';
 
 const borderRadius = 15;
 
 const RestoCard = ({ data, navigation, }) => {
-
-    useEffect(() => {
-        try {
-            if (!data[RestaurantDBFields.endDate] || (data[RestaurantDBFields.endDate] && new Date(data[RestaurantDBFields.endDate]) < new Date())) {
-                RestaurantDBPath
-                    .doc(data[RestaurantDBFields.restId])
-                    .update({
-                        isActive: 'false',
-                    })
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }, [])
-
     return (
         <TouchableOpacity
             style={styles.Container}

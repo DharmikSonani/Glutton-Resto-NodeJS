@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Reducers } from '../../constants/Strings';
 import { useSelector } from 'react-redux';
-import { format } from 'date-fns';
 import { getBookingsByUidAPI } from '../../api/utils';
+import socketServices from '../../api/Socket';
 
 const useScreenHooks = (props) => {
 
@@ -17,12 +17,19 @@ const useScreenHooks = (props) => {
 
     // UseEffects
     useEffect(() => {
-        getBookingsDate();
+        setLoading(true);
+        getBookingsData();
+        socketServices.on('NewBookingForCutomer', getBookingsData);
+        socketServices.on('CancelBookingForCutomer', getBookingsData);
+
+        return () => {
+            socketServices.removeListener('NewBookingForCutomer');
+            socketServices.removeListener('CancelBookingForCutomer');
+        }
     }, [])
 
     // Methods
-    const getBookingsDate = async () => {
-        setLoading(true);
+    const getBookingsData = async () => {
         try {
             const res = await getBookingsByUidAPI(uid);
             res?.data && setData(res?.data?.data);

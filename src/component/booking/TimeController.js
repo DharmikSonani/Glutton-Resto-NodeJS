@@ -6,6 +6,7 @@ import moment from 'moment'
 import LinearGradient from 'react-native-linear-gradient'
 import { NormalSnackBar } from '../../constants/SnackBars'
 import { getBookingTimeSlot } from '../../api/utils'
+import socketServices from '../../api/Socket'
 
 const width = Dimensions.get('window').width - 70;
 
@@ -24,12 +25,18 @@ const TimeController = ({
 
     useEffect(() => {
         setTimeLoading(true);
-        if (onDateChange == format(new Date(), 'yyyy-MM-dd').toString()) {
-            fetchCurrentTime(onDateChange);
-        } else {
-            fetchBookings(onDateChange);
+        getTimeSlot(onDateChange);
+        socketServices.on('BookingTimeSlotChange', () => {
+            getTimeSlot(onDateChange);
+        })
+        return () => {
+            socketServices.removeListener('BookingTimeSlotChange');
         }
     }, [onDateChange])
+
+    const getTimeSlot = (date) => {
+        date == format(new Date(), 'yyyy-MM-dd').toString() ? fetchCurrentTime(date) : fetchBookings(date);
+    }
 
     const fetchCurrentTime = (date) => {
         var h = new Date().getHours();

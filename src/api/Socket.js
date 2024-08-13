@@ -10,8 +10,6 @@ class WSService {
                 transports: ['websocket']
             })
 
-            // console.log("initializing socket", this.socket);
-
             this.socket.on("connect", (data) => {
                 console.log("socket connecteddd");
             })

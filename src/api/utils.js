@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const DOMAIN = `http://192.168.1.5:8000/`; // Sonani 5G
-// export const DOMAIN = `http://192.168.29.208:8000/`; // Miyani 5G
+// export const DOMAIN = `http://192.168.1.5:8000/`; // Sonani 5G
+export const DOMAIN = `http://192.168.29.208:8000/`; // Miyani 5G
 // export const DOMAIN = `https://glutton-server.vercel.app/`; // Live Server
 
 const BASE_URL = `${DOMAIN}api/`;

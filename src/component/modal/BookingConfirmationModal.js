@@ -15,6 +15,7 @@ import FieldValuePairInput from '../input/FieldValuePairInput';
 import { keyboardType } from '../../constants/Strings';
 import { emailRegEx } from '../../constants/RegularExpression';
 import { bookTableAPI } from '../../api/utils';
+import socketServices from '../../api/Socket';
 
 const width = Dimensions.get('window').width * 0.9;
 
@@ -88,6 +89,7 @@ const BookingConfirmationModal = ({
             setLoading(true);
             const res = await bookTableAPI(params);
             if (res?.data && res?.data?.status == true) {
+                socketServices.emit('AddBooking', res?.data?.data);
                 setIsDone(true);
                 setTimeout(() => {
                     setModalVisible(false);

@@ -7,6 +7,7 @@ import QRCodeModal from './modal/QRCodeModal';
 import BookingCard from './BookingCard';
 import { cancelBookingAPI } from '../api/utils';
 import { NormalSnackBar } from '../constants/SnackBars';
+import socketServices from '../api/Socket';
 
 const BookingList = ({
     data,
@@ -19,7 +20,12 @@ const BookingList = ({
         try {
             if (id) {
                 const res = await cancelBookingAPI(id);
-                (res?.data && res?.data?.data) ? NormalSnackBar('Booking Cancel.') : NormalSnackBar('Something wents wrong.');
+                if (res?.data && res?.data?.data) {
+                    socketServices.emit('CancelBooking', res?.data?.data);
+                    NormalSnackBar('Booking Cancel.');
+                } else {
+                    NormalSnackBar('Something wents wrong.');
+                }
             }
         } catch (error) {
             console.log(error);

@@ -9,6 +9,7 @@ import { setUserDataInRedux } from './src/redux/UserData/UserDataAction';
 import { getCustomerByUidAPI } from './src/api/utils';
 import { setFavouriteRestaurantsInRedux } from './src/redux/FavouriteRestaurants/FavouriteRestaurantsAction';
 import { CustomerDBFields } from './src/constants/Database';
+import socketServices from './src/api/Socket';
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
+    authId && socketServices.initializeSocket();
     authId && fetchUserData(authId);
   }, [authId])
 

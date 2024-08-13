@@ -8,6 +8,7 @@ import { Reducers } from '../../constants/Strings';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NormalSnackBar } from '../../constants/SnackBars';
 import { addRatingAPI } from '../../api/utils';
+import socketServices from '../../api/Socket';
 
 const AddReviewModal = ({
     restId,
@@ -63,6 +64,7 @@ const AddReviewModal = ({
 
             if (res?.data && res.data?.status == true) {
                 NormalSnackBar('Review Submit.')
+                socketServices.emit('AddReview');
                 setLoading(false);
                 setRating(0);
                 setDesc('');

@@ -4,6 +4,7 @@ import ReviewCard from '../ReviewCard';
 import { COLOR } from '../../constants/Colors';
 import { headerStyle } from '../../constants/Styles';
 import { getRestaurantReviewsAPI } from '../../api/utils';
+import socketServices from '../../api/Socket';
 
 const Reviews = ({ restId, height, width, }) => {
 
@@ -11,6 +12,10 @@ const Reviews = ({ restId, height, width, }) => {
 
     useEffect(() => {
         fetchData();
+        socketServices.on('ReviewAdded', fetchData);
+        return () => {
+            socketServices.removeListener('ReviewAdded');
+        }
     }, [])
 
     const fetchData = async () => {

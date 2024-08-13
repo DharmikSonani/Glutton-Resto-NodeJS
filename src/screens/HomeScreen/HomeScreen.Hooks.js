@@ -4,6 +4,7 @@ import { Animated, Dimensions, Keyboard, PermissionsAndroid, Platform } from 're
 import { useEffect, useState } from 'react';
 import Geolocation from 'react-native-geolocation-service'
 import { getActiveRestaurantsAPI } from '../../api/utils';
+import socketServices from '../../api/Socket';
 
 const useScreenHooks = (props) => {
 
@@ -11,8 +12,8 @@ const useScreenHooks = (props) => {
     const navigation = props.navigation;
     const mapAnimation = new Animated.Value(1);
     const bottomTabHeight = useSelector(state => state[Reducers.BottomTabHeightReducer]);
+    const uid = useSelector(state => state[Reducers.AuthReducer]);
     const width = Dimensions.get('window').width - 50;
-
     const initialRegion = {
         latitude: 20.5937,
         longitude: 78.9629,
@@ -31,6 +32,7 @@ const useScreenHooks = (props) => {
     // UseEffects
     useEffect(() => {
         fetchData();
+        socketServices.emit('JoinSocket', uid);
     }, [])
 
     // Methods

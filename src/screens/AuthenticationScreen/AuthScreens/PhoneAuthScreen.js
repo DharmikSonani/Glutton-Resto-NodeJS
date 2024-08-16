@@ -7,12 +7,11 @@ import { NavigationScreens, keyboardType } from '../../../constants/Strings'
 import { useDispatch } from 'react-redux'
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { storeAuthID } from '../../../constants/AsyncStorage'
 import { setAuthIDInRedux } from '../../../redux/Authentication/AuthAction'
-import { CustomerDBFields, CustomerDBPath } from '../../../constants/Database'
 import { navigationToReset } from '../../../constants/NavigationController'
+import { customerRegiaterAPI, getCustomerByUidAPI } from '../../../api/utils'
 
 const CELL_COUNT = 6;
 
@@ -80,22 +79,27 @@ const PhoneAuthScreen = ({
             await confirm.confirm(otp);
             if (auth().currentUser) {
                 const uid = auth().currentUser.uid;
-                const path = CustomerDBPath.doc(uid);
-                path.get()
-                    .then(async (documentSnapshot) => {
-                        if (!documentSnapshot.exists) {
-                            let data = {};
-                            data[CustomerDBFields.authType] = 'phone';
-                            data[CustomerDBFields.contactNo] = phoneNo;
-                            data[CustomerDBFields.createdAt] = firestore.Timestamp.fromDate(new Date());
-                            data[CustomerDBFields.email] = '';
-                            data[CustomerDBFields.userId] = uid;
-                            data[CustomerDBFields.userImg] = '';
-                            data[CustomerDBFields.userName] = '';
-                            await path.set(data)
-                        }
+                const customer = await getCustomerByUidAPI(uid);
+
+                if (customer?.data) {
+                    if (customer?.data?.data) {
                         storeAuthInfo(uid);
-                    })
+                    } else {
+                        const data = {
+                            "authType": "phone",
+                            "uid": uid,
+                            "email": "",
+                            "contactNo": phoneNo,
+                            "userName": "",
+                        }
+                        const register = await customerRegiaterAPI(data);
+                        if (register?.data && register?.data?.data) {
+                            storeAuthInfo(uid);
+                        } else {
+                            onSuccess('Something wents wrong.');
+                        }
+                    }
+                }
             }
         } catch (error) {
             setLoading(false);
@@ -107,6 +111,7 @@ const PhoneAuthScreen = ({
             if (error.code == 'auth/invalid-verification-code') {
                 onSuccess('Invalid OTP')
             }
+
             console.log(error)
         }
     }

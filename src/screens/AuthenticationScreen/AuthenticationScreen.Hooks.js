@@ -4,12 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
-import { CustomerDBFields, CustomerDBPath } from '../../constants/Database';
 import { storeAuthID } from '../../constants/AsyncStorage';
 import { setAuthIDInRedux } from '../../redux/Authentication/AuthAction';
 import { navigationToReset } from '../../constants/NavigationController';
-import firestore from '@react-native-firebase/firestore';
 import { NormalSnackBar } from '../../constants/SnackBars';
+import { customerRegiaterAPI, getCustomerByUidAPI } from '../../api/utils';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height + 30;
@@ -76,38 +75,37 @@ const useScreenHooks = (props) => {
 
             auth()
                 .signInWithCredential(googleCredential)
-                .then((res) => {
+                .then(async (res) => {
                     const user = res.user;
                     const uid = res.user.uid;
 
-                    let path = CustomerDBPath.doc(uid);
+                    const customer = await getCustomerByUidAPI(uid);
 
-                    path.get()
-                        .then((documentSnapshot) => {
-                            let data = {}
-
-                            data[CustomerDBFields.authType] = 'google';
-
-                            if (documentSnapshot.exists) {
-                                path = path.update(data)
-                            } else {
-
-                                data[CustomerDBFields.contactNo] = '';
-                                data[CustomerDBFields.createdAt] = firestore.Timestamp.fromDate(new Date());
-                                data[CustomerDBFields.email] = user.email;
-                                data[CustomerDBFields.userId] = uid;
-                                data[CustomerDBFields.userImg] = '';
-                                data[CustomerDBFields.userName] = user.displayName;
-
-                                path = path.set(data)
+                    if (customer?.data) {
+                        if (customer?.data?.data) {
+                            await storeAuthID(uid);
+                            dispatch(setAuthIDInRedux(uid));
+                            navigationToReset(navigation, NavigationScreens.HomeTab);
+                            setLoading(false);
+                        } else {
+                            const data = {
+                                "authType": "google",
+                                "uid": uid,
+                                "email": user.email,
+                                "contactNo": "",
+                                "userName": user.displayName,
                             }
-                            path.then(async () => {
+                            const register = await customerRegiaterAPI(data);
+                            if (register?.data && register?.data?.data) {
                                 await storeAuthID(uid);
                                 dispatch(setAuthIDInRedux(uid));
                                 navigationToReset(navigation, NavigationScreens.HomeTab);
                                 setLoading(false);
-                            })
-                        })
+                            } else {
+                                NormalSnackBar('Something wents wrong.');
+                            }
+                        }
+                    }
                 }).catch((e) => {
                     console.log(e)
                     setLoading(false);

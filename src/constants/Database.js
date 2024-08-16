@@ -1,9 +1,3 @@
-import firestore from '@react-native-firebase/firestore';
-
-export const AdminDBPath = firestore().collection("Users").doc("Admin").collection("Admin");
-export const RestaurantDBPath = firestore().collection("Users").doc("Restaurant").collection("Restaurant");
-export const CustomerDBPath = firestore().collection("Users").doc("Customers").collection("Customers");
-
 export const AdminDBFields = {
     createdAt: 'createdAt',
     email: 'email',

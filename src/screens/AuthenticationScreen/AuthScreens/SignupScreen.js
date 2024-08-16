@@ -1,17 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import { GRADIENTCOLOR } from '../../../constants/Colors'
 import AuthInput from '../../../component/input/AuthInput';
 import CustomButton from '../../../component/button/CustomButton';
 import { NavigationScreens, keyboardType } from '../../../constants/Strings';
-import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { CustomerDBFields, CustomerDBPath } from '../../../constants/Database';
 import { emailRegEx, passwordRegEx } from '../../../constants/RegularExpression';
 import { storeAuthID } from '../../../constants/AsyncStorage';
 import { setAuthIDInRedux } from '../../../redux/Authentication/AuthAction';
 import { useDispatch } from 'react-redux';
 import { navigationToReset } from '../../../constants/NavigationController';
+import { customerRegiaterAPI } from '../../../api/utils';
 
 const SignupScreen = ({
     onLayout,
@@ -57,7 +56,31 @@ const SignupScreen = ({
         try {
             setLoading(true);
             auth().createUserWithEmailAndPassword(email, password)
-                .then((res) => createUser(res.user.uid))
+                .then(async (res) => {
+                    const uid = res.user.uid;
+
+                    const params = {
+                        "authType": "email",
+                        "uid": uid,
+                        "email": email,
+                        "contactNo": "",
+                        "userName": name
+                    }
+
+                    const user = await customerRegiaterAPI(params);
+
+                    if (user?.data && user?.data?.data) {
+                        await storeAuthID(uid);
+                        dispatch(setAuthIDInRedux(uid));
+                        onScreenChange(0);
+                        setTimeout(() => {
+                            navigationToReset(navigation, NavigationScreens.HomeTab);
+                        }, duration - 200);
+                    } else {
+                        onSuccess('Something wents wrong');
+                    }
+                    setLoading(false);
+                })
                 .catch((e) => {
                     setLoading(false);
                     if (e.code == 'auth/email-already-in-use') {
@@ -66,33 +89,6 @@ const SignupScreen = ({
                 })
         } catch (e) { console.log(e), setLoading(false) }
     }
-
-    const createUser = async (uid) => {
-        try {
-            let data = {}
-            data[CustomerDBFields.authType] = 'email';
-            data[CustomerDBFields.contactNo] = '';
-            data[CustomerDBFields.createdAt] = firestore.Timestamp.fromDate(new Date());
-            data[CustomerDBFields.email] = email;
-            data[CustomerDBFields.userId] = uid;
-            data[CustomerDBFields.userImg] = '';
-            data[CustomerDBFields.userName] = name;
-
-            CustomerDBPath.doc(uid).set(data)
-                .then(async () => {
-                    await storeAuthID(uid);
-                    dispatch(setAuthIDInRedux(uid));
-                    setLoading(false);
-                    onScreenChange(0);
-                    setTimeout(() => {
-                        navigationToReset(navigation, NavigationScreens.HomeTab);
-                    }, duration - 200);
-                })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
 
     return (
         <View style={styles.Container} onLayout={onLayout}>

@@ -5,7 +5,11 @@ export const DOMAIN = `https://formally-valid-mite.ngrok-free.app/`; // NGROCK L
 
 const BASE_URL = `${DOMAIN}api/`;
 
+const USER_BASE_URL = `${BASE_URL}/user`;
+const CHECK_USER_URL = `${USER_BASE_URL}/check`;
+
 const CUSTOMER_BASE_URL = `${BASE_URL}/customer`;
+const CUSTOMER_REGISTER_URL = `${CUSTOMER_BASE_URL}/register`;
 const CUSTOMER_UPDATE_URL = `${CUSTOMER_BASE_URL}/update`;
 const MANAGE_FAVORITE_URL = `${CUSTOMER_BASE_URL}/manage-favorite`;
 
@@ -30,6 +34,11 @@ const INVOICE_BASE_URL = `${BASE_URL}/invoice`;
 const INVOICE_LIST_URL = `${INVOICE_BASE_URL}/customer`;
 
 // GET
+export const checkUserByUID = async (uid) => {
+    const res = await axios.get(`${CHECK_USER_URL}/${uid}`);
+    return res;
+}
+
 export const getCustomerByUidAPI = async (uid) => {
     const res = await axios.get(`${CUSTOMER_BASE_URL}/${uid}`);
     return res;
@@ -71,6 +80,11 @@ export const getInvoiceByIDAPI = async (id) => {
 }
 
 // POST
+export const customerRegiaterAPI = async (params) => {
+    const res = await axios.post(`${CUSTOMER_REGISTER_URL}`, params);
+    return res;
+}
+
 export const getFavouriteRestaurantsAPI = async (params) => {
     const res = await axios.post(`${FAVOURITE_RESTAURANT_URL}`, params);
     return res;

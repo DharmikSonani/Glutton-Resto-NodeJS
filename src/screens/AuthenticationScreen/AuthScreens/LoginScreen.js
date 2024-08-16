@@ -8,10 +8,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import auth from '@react-native-firebase/auth';
 import { emailRegEx } from '../../../constants/RegularExpression'
 import { useDispatch } from 'react-redux'
-import { AdminDBPath, CustomerDBPath, RestaurantDBPath } from '../../../constants/Database'
 import { storeAuthID } from '../../../constants/AsyncStorage'
 import { setAuthIDInRedux } from '../../../redux/Authentication/AuthAction'
 import { navigationToReset } from '../../../constants/NavigationController'
+import { checkUserByUID } from '../../../api/utils'
 
 const LoginScreen = ({
     onLayout,
@@ -104,9 +104,33 @@ const LoginScreen = ({
         }
 
         setLoading(true);
+
         try {
             auth().signInWithEmailAndPassword(email, password)
-                .then((res) => checkUserData(res.user.uid))
+                .then(async (res) => {
+                    const uid = res.user.uid;
+                    const user = await checkUserByUID(uid);
+                    if (user?.data) {
+                        if (user?.data?.data) {
+                            const type = user.data.data;
+                            if (type == 'Customer') {
+                                await storeAuthID(uid);
+                                dispatch(setAuthIDInRedux(uid));
+                                onScreenChange(0);
+                                setTimeout(() => {
+                                    navigationToReset(navigation, NavigationScreens.HomeTab);
+                                }, duration - 200);
+                            } else {
+                                auth().signOut();
+                                onSuccess(`This email is register as Glutton ${type}`);
+                            }
+                        }
+                        setLoading(false);
+                    } else {
+                        setLoading(false);
+                        onSuccess('Something wents wrong.');
+                    }
+                })
                 .catch((e) => {
                     setLoading(false);
                     if (e.code == 'auth/user-not-found') {
@@ -116,65 +140,6 @@ const LoginScreen = ({
                     }
                 })
         } catch (e) { console.log(e) }
-    }
-
-    const checkUserData = (uid) => {
-        try {
-            CustomerDBPath
-                .doc(uid)
-                .get()
-                .then(async (querySnap) => {
-                    if (querySnap.exists) {
-                        await storeAuthID(uid);
-                        dispatch(setAuthIDInRedux(uid));
-                        setLoading(false)
-                        onScreenChange(0);
-                        setTimeout(() => {
-                            navigationToReset(navigation, NavigationScreens.HomeTab);
-                        }, duration - 200);
-                    } else {
-                        checkRestuarant(uid);
-                        checkAdmin(uid);
-                    }
-                })
-        } catch (e) {
-            setLoading(false);
-            console.log(e);
-        }
-    }
-
-    const checkRestuarant = (uid) => {
-        try {
-            RestaurantDBPath
-                .doc(uid)
-                .onSnapshot((querySnap) => {
-                    if (querySnap.exists) {
-                        setLoading(false);
-                        auth().signOut();
-                        onSuccess('This email is register as Glutton Restaurant.');
-                    }
-                })
-        } catch (e) {
-            setLoading(false);
-            console.log(e);
-        }
-    }
-
-    const checkAdmin = (uid) => {
-        try {
-            AdminDBPath
-                .doc(uid)
-                .onSnapshot((querySnap) => {
-                    if (querySnap.exists) {
-                        setLoading(false);
-                        auth().signOut();
-                        onSuccess('This email is register as Glutton Admin.');
-                    }
-                })
-        } catch (e) {
-            setLoading(false);
-            console.log(e);
-        }
     }
 
     return (

@@ -1,3 +1,7 @@
+import firestore from '@react-native-firebase/firestore';
+
+export const DomainPath = firestore().collection("Server").doc("DOMAIN");
+
 export const AdminDBFields = {
     createdAt: 'createdAt',
     email: 'email',

@@ -3,6 +3,7 @@ export const Reducers = {
     UserDataReducer: 'UserDataReducer',
     BottomTabHeightReducer: 'BottomTabHeightReducer',
     FavouriteRestaurantsReducer: 'FavouriteRestaurantsReducer',
+    ServerDomainReducer: 'ServerDomainReducer',
 }
 
 export const NavigationScreens = {

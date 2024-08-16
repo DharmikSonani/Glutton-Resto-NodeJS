@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
-import { DOMAIN } from './utils';
 
-const SOCKET_URL = DOMAIN;
+const SOCKET_URL = 'https://formally-valid-mite.ngrok-free.app/';
 
 class WSService {
     initializeSocket = async (url) => {

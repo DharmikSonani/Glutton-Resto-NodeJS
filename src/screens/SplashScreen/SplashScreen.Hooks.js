@@ -4,8 +4,6 @@ import { getAuthID } from '../../constants/AsyncStorage';
 import { setAuthIDInRedux } from '../../redux/Authentication/AuthAction';
 import { useEffect } from 'react';
 import { navigationToReplace } from '../../constants/NavigationController';
-import { DomainPath } from '../../constants/Database';
-import { setServerDomainInRedux } from '../../redux/ServerDomain/ServerDomainAction';
 
 const useScreenHooks = (props) => {
 
@@ -18,7 +16,6 @@ const useScreenHooks = (props) => {
 
     // UseEffects
     useEffect(() => {
-        fetchDomain();
         getFromStorage();
     }, [])
 
@@ -33,21 +30,6 @@ const useScreenHooks = (props) => {
                 navigationToReplace(navigation, NavigationScreens.AuthenticationScreen);
             }
         }, 2500);
-    }
-
-    const fetchDomain = async () => {
-        try {
-            DomainPath.onSnapshot((data) => {
-                const { url } = data?.data();
-                if (url != '' && url.includes('http')) {
-                    dispatch(setServerDomainInRedux(url));
-                } else {
-                    dispatch(setServerDomainInRedux('https://glutton-server.vercel.app/'));
-                }
-            })
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     return {};

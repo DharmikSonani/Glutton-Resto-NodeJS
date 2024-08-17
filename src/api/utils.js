@@ -3,6 +3,8 @@ import axios from "axios";
 // export const DOMAIN = `https://glutton-server.vercel.app/`; // Live Server
 export const DOMAIN = `https://formally-valid-mite.ngrok-free.app/`; // NGROCK Live Server
 
+export const SOCKET_URL = 'https://formally-valid-mite.ngrok-free.app/';
+
 const BASE_URL = `${DOMAIN}api/`;
 
 const USER_BASE_URL = `${BASE_URL}/user`;

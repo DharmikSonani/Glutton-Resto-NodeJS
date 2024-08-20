@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList, } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns';
 import LinearGradient from 'react-native-linear-gradient';
 import { COLOR, GRADIENTCOLOR } from '../constants/Colors';
@@ -15,6 +15,8 @@ const BookingList = ({
 
     const bookings = data ? data.bookings : [];
     const [selectedBooking, setSelectedBooking] = useState({});
+
+    useEffect(() => { setSelectedBooking({}) }, [bookings])
 
     const onCancelBooking = async (id) => {
         try {

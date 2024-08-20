@@ -21,10 +21,12 @@ const useScreenHooks = (props) => {
         getBookingsData();
         socketServices.on('NewBookingForCutomer', getBookingsData);
         socketServices.on('CancelBookingForCutomer', getBookingsData);
+        socketServices.on('VerifyBookingForCutomer', getBookingsData);
 
         return () => {
             socketServices.removeListener('NewBookingForCutomer');
             socketServices.removeListener('CancelBookingForCutomer');
+            socketServices.removeListener('VerifyBookingForCutomer');
         }
     }, [])
 

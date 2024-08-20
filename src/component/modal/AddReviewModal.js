@@ -64,7 +64,7 @@ const AddReviewModal = ({
 
             if (res?.data && res.data?.status == true) {
                 NormalSnackBar('Review Submit.')
-                socketServices.emit('AddReview');
+                socketServices.emit('AddReview', res?.data?.data);
                 setLoading(false);
                 setRating(0);
                 setDesc('');

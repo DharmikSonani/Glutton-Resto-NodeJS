@@ -60,7 +60,10 @@ const useScreenHooks = (props) => {
             }
 
             setLoading(true);
-            const imageUri = image.includes('http') ? image : await uploadImage();
+
+            let imageUri = ''
+
+            image && (imageUri = image?.includes('http') ? image : await uploadImage());
 
             let data = {};
             data[CustomerDBFields.userName] = name;

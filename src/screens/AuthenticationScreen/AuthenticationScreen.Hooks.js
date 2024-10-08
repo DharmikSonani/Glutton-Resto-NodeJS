@@ -9,6 +9,7 @@ import { setAuthIDInRedux } from '../../redux/Authentication/AuthAction';
 import { navigationToReset } from '../../constants/NavigationController';
 import { NormalSnackBar } from '../../constants/SnackBars';
 import { customerRegiaterAPI, getCustomerByUidAPI } from '../../api/utils';
+import socketServices from '../../api/Socket';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height + 30;
@@ -97,6 +98,7 @@ const useScreenHooks = (props) => {
                             }
                             const register = await customerRegiaterAPI(data);
                             if (register?.data && register?.data?.data) {
+                                socketServices.emit('CustomersUpdates', register?.data?.data)
                                 await storeAuthID(uid);
                                 dispatch(setAuthIDInRedux(uid));
                                 navigationToReset(navigation, NavigationScreens.HomeTab);

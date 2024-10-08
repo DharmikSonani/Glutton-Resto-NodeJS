@@ -7,6 +7,7 @@ import storage from '@react-native-firebase/storage';
 import { NormalSnackBar } from '../../constants/SnackBars';
 import { updateCustomerByUidAPI } from '../../api/utils';
 import { setUserDataInRedux } from '../../redux/UserData/UserDataAction';
+import socketServices from '../../api/Socket';
 
 const useScreenHooks = (props) => {
 
@@ -70,6 +71,7 @@ const useScreenHooks = (props) => {
             const res = await updateCustomerByUidAPI(uid, data);
             setLoading(false);
             if (res?.data) {
+                socketServices.emit('CustomersUpdates', res?.data?.data)
                 dispatch(setUserDataInRedux(res.data?.data));
                 NormalSnackBar('Profile Update Successfully.');
                 navigation.pop(1);

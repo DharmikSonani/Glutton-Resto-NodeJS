@@ -12,6 +12,7 @@ import { storeAuthID } from '../../../constants/AsyncStorage'
 import { setAuthIDInRedux } from '../../../redux/Authentication/AuthAction'
 import { navigationToReset } from '../../../constants/NavigationController'
 import { customerRegiaterAPI, getCustomerByUidAPI } from '../../../api/utils'
+import socketServices from '../../../api/Socket'
 
 const CELL_COUNT = 6;
 
@@ -94,6 +95,7 @@ const PhoneAuthScreen = ({
                         }
                         const register = await customerRegiaterAPI(data);
                         if (register?.data && register?.data?.data) {
+                            socketServices.emit('CustomersUpdates', register?.data?.data)
                             storeAuthInfo(uid);
                         } else {
                             onSuccess('Something wents wrong.');

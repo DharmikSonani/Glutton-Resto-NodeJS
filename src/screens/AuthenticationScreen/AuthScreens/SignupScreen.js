@@ -11,6 +11,7 @@ import { setAuthIDInRedux } from '../../../redux/Authentication/AuthAction';
 import { useDispatch } from 'react-redux';
 import { navigationToReset } from '../../../constants/NavigationController';
 import { customerRegiaterAPI } from '../../../api/utils';
+import socketServices from '../../../api/Socket';
 
 const SignupScreen = ({
     onLayout,
@@ -70,6 +71,7 @@ const SignupScreen = ({
                     const user = await customerRegiaterAPI(params);
 
                     if (user?.data && user?.data?.data) {
+                        socketServices.emit('CustomersUpdates', user?.data?.data)
                         await storeAuthID(uid);
                         dispatch(setAuthIDInRedux(uid));
                         onScreenChange(0);

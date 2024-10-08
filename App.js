@@ -17,13 +17,13 @@ const App = () => {
   const authId = useSelector(state => state[Reducers.AuthReducer]);
 
   useEffect(() => {
+    socketServices.initializeSocket();
     GoogleSignin.configure({
       webClientId: '910507929298-vvkde5e56a8ljlcnr7j8dvdhrsm4q2ff.apps.googleusercontent.com',
     });
   }, [])
 
   useEffect(() => {
-    authId && socketServices.initializeSocket();
     authId && fetchUserData(authId);
   }, [authId])
 

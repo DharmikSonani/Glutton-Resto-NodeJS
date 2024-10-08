@@ -116,14 +116,15 @@ const AuthenticationScreen = (props) => {
                     text={'Continue with Google'}
                     onPress={onGooglePress}
                     icon={<FastImage source={GoogleIcon} style={{ height: '100%', aspectRatio: 1 / 1, }} resizeMode='contain' />}
+                    style={{ marginBottom: 0 }}
                 />
 
-                <AuthButton
+                {/* <AuthButton
                     text={'Continue with Phone'}
                     onPress={() => setActiveView(1)}
                     icon={<FontAwesome color={COLOR.BLACK} name='phone' size={25} style={{ top: 1 }} />}
                     style={{ marginBottom: 0 }}
-                />
+                /> */}
 
                 <View style={{
                     width: '100%',

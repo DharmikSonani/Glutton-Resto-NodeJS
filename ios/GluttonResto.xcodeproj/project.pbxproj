@@ -13,10 +13,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3E553E11A26B9A900E65503C /* Pods_GluttonResto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4EB225B22B5F5CD1C4CB3F7 /* Pods_GluttonResto.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		844AEA0A6844E463B0AD8A2B /* Pods_GluttonResto_GluttonRestoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E5CA41100284832EC1542C /* Pods_GluttonResto_GluttonRestoTests.framework */; };
 		88F4E2BF93C50F830D952CDD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 20791442949BC185077DF5CA /* PrivacyInfo.xcprivacy */; };
-		96C1674968C2C3345F3B7A5D /* Pods_GluttonResto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A25BFB18C6EBC7C9AD53C047 /* Pods_GluttonResto.framework */; };
-		B39CD8C0A0B91C46F918CA49 /* Pods_GluttonResto_GluttonRestoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736E78B330EED97C96B6169E /* Pods_GluttonResto_GluttonRestoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* GluttonRestoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GluttonRestoTests.m; sourceTree = "<group>"; };
 		00F3FDAB2C14225600834218 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		03E5CA41100284832EC1542C /* Pods_GluttonResto_GluttonRestoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GluttonResto_GluttonRestoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* GluttonResto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GluttonResto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = GluttonResto/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = GluttonResto/AppDelegate.mm; sourceTree = "<group>"; };
@@ -43,14 +44,13 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GluttonResto/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GluttonResto/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = GluttonResto/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		164282153AAC13212D3FCD03 /* Pods-GluttonResto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto.debug.xcconfig"; path = "Target Support Files/Pods-GluttonResto/Pods-GluttonResto.debug.xcconfig"; sourceTree = "<group>"; };
+		17FF69E5F986F5B7BDB7847D /* Pods-GluttonResto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto.debug.xcconfig"; path = "Target Support Files/Pods-GluttonResto/Pods-GluttonResto.debug.xcconfig"; sourceTree = "<group>"; };
 		20791442949BC185077DF5CA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = GluttonResto/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		2888326BA8A44FFDD8B0496B /* Pods-GluttonResto-GluttonRestoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto-GluttonRestoTests.release.xcconfig"; path = "Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests.release.xcconfig"; sourceTree = "<group>"; };
-		5055A6523060A168BDEFE219 /* Pods-GluttonResto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto.release.xcconfig"; path = "Target Support Files/Pods-GluttonResto/Pods-GluttonResto.release.xcconfig"; sourceTree = "<group>"; };
-		736E78B330EED97C96B6169E /* Pods_GluttonResto_GluttonRestoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GluttonResto_GluttonRestoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		65DEC8E15E104F1E6DD211EF /* Pods-GluttonResto-GluttonRestoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto-GluttonRestoTests.debug.xcconfig"; path = "Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		753C9DAF2AED07FB73079B16 /* Pods-GluttonResto-GluttonRestoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto-GluttonRestoTests.release.xcconfig"; path = "Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = GluttonResto/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A25BFB18C6EBC7C9AD53C047 /* Pods_GluttonResto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GluttonResto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4FFC2DEC7ADBE583BFC9660 /* Pods-GluttonResto-GluttonRestoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto-GluttonRestoTests.debug.xcconfig"; path = "Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B9B35137FA9EEE0A0ABCB442 /* Pods-GluttonResto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GluttonResto.release.xcconfig"; path = "Target Support Files/Pods-GluttonResto/Pods-GluttonResto.release.xcconfig"; sourceTree = "<group>"; };
+		C4EB225B22B5F5CD1C4CB3F7 /* Pods_GluttonResto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GluttonResto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B39CD8C0A0B91C46F918CA49 /* Pods_GluttonResto_GluttonRestoTests.framework in Frameworks */,
+				844AEA0A6844E463B0AD8A2B /* Pods_GluttonResto_GluttonRestoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96C1674968C2C3345F3B7A5D /* Pods_GluttonResto.framework in Frameworks */,
+				3E553E11A26B9A900E65503C /* Pods_GluttonResto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,8 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				A25BFB18C6EBC7C9AD53C047 /* Pods_GluttonResto.framework */,
-				736E78B330EED97C96B6169E /* Pods_GluttonResto_GluttonRestoTests.framework */,
+				C4EB225B22B5F5CD1C4CB3F7 /* Pods_GluttonResto.framework */,
+				03E5CA41100284832EC1542C /* Pods_GluttonResto_GluttonRestoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -153,10 +153,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				164282153AAC13212D3FCD03 /* Pods-GluttonResto.debug.xcconfig */,
-				5055A6523060A168BDEFE219 /* Pods-GluttonResto.release.xcconfig */,
-				C4FFC2DEC7ADBE583BFC9660 /* Pods-GluttonResto-GluttonRestoTests.debug.xcconfig */,
-				2888326BA8A44FFDD8B0496B /* Pods-GluttonResto-GluttonRestoTests.release.xcconfig */,
+				17FF69E5F986F5B7BDB7847D /* Pods-GluttonResto.debug.xcconfig */,
+				B9B35137FA9EEE0A0ABCB442 /* Pods-GluttonResto.release.xcconfig */,
+				65DEC8E15E104F1E6DD211EF /* Pods-GluttonResto-GluttonRestoTests.debug.xcconfig */,
+				753C9DAF2AED07FB73079B16 /* Pods-GluttonResto-GluttonRestoTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -168,12 +168,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "GluttonRestoTests" */;
 			buildPhases = (
-				AAD4826FE4F844B1E5B90D4D /* [CP] Check Pods Manifest.lock */,
+				D4EC6AEE2DEED90291EFD74D /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				A40262C553A4062A1DD43219 /* [CP] Embed Pods Frameworks */,
-				3C54B2598ABCBA12206CAB01 /* [CP] Copy Pods Resources */,
+				D82CE2F677D140DB4DE1A2D2 /* [CP] Embed Pods Frameworks */,
+				838A190549AC78DAB3F6EAA2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,14 +189,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "GluttonResto" */;
 			buildPhases = (
-				AC2CE7B58962EC282766AE54 /* [CP] Check Pods Manifest.lock */,
+				9D22A1F247DC0C4E7FD1C4CE /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				6FF88D319E17BEBC8F5E9642 /* [CP] Embed Pods Frameworks */,
-				9382AC669AC0CA2E9625434C /* [CP] Copy Pods Resources */,
-				F2BEFFEA9363631783763663 /* [CP-User] [RNFB] Core Configuration */,
+				B324A0EA4839B7CED65ACFC6 /* [CP] Embed Pods Frameworks */,
+				3DCCD74B5C69E0615E2CFDE0 /* [CP] Copy Pods Resources */,
+				FCCC2673189770D08766B748 /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
@@ -281,41 +281,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		3C54B2598ABCBA12206CAB01 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6FF88D319E17BEBC8F5E9642 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto/Pods-GluttonResto-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto/Pods-GluttonResto-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GluttonResto/Pods-GluttonResto-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9382AC669AC0CA2E9625434C /* [CP] Copy Pods Resources */ = {
+		3DCCD74B5C69E0615E2CFDE0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -332,46 +298,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GluttonResto/Pods-GluttonResto-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A40262C553A4062A1DD43219 /* [CP] Embed Pods Frameworks */ = {
+		838A190549AC78DAB3F6EAA2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AAD4826FE4F844B1E5B90D4D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GluttonResto-GluttonRestoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AC2CE7B58962EC282766AE54 /* [CP] Check Pods Manifest.lock */ = {
+		9D22A1F247DC0C4E7FD1C4CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -393,7 +337,63 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F2BEFFEA9363631783763663 /* [CP-User] [RNFB] Core Configuration */ = {
+		B324A0EA4839B7CED65ACFC6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto/Pods-GluttonResto-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto/Pods-GluttonResto-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GluttonResto/Pods-GluttonResto-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4EC6AEE2DEED90291EFD74D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GluttonResto-GluttonRestoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D82CE2F677D140DB4DE1A2D2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GluttonResto-GluttonRestoTests/Pods-GluttonResto-GluttonRestoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCCC2673189770D08766B748 /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,7 +440,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4FFC2DEC7ADBE583BFC9660 /* Pods-GluttonResto-GluttonRestoTests.debug.xcconfig */;
+			baseConfigurationReference = 65DEC8E15E104F1E6DD211EF /* Pods-GluttonResto-GluttonRestoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -468,7 +468,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2888326BA8A44FFDD8B0496B /* Pods-GluttonResto-GluttonRestoTests.release.xcconfig */;
+			baseConfigurationReference = 753C9DAF2AED07FB73079B16 /* Pods-GluttonResto-GluttonRestoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -493,7 +493,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 164282153AAC13212D3FCD03 /* Pods-GluttonResto.debug.xcconfig */;
+			baseConfigurationReference = 17FF69E5F986F5B7BDB7847D /* Pods-GluttonResto.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -521,7 +521,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5055A6523060A168BDEFE219 /* Pods-GluttonResto.release.xcconfig */;
+			baseConfigurationReference = B9B35137FA9EEE0A0ABCB442 /* Pods-GluttonResto.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
